@@ -7,17 +7,15 @@
 
 namespace xutl\broadcast;
 
-
-use AliyunMNS\Requests\CreateTopicRequest;
-use AliyunMNS\Requests\DeleteTopicRequest;
-use AliyunMNS\Requests\UnsubscribeRequest;
-use AliyunMNS\Responses\CreateTopicResponse;
-use AliyunMNS\Responses\DeleteTopicResponse;
-use AliyunMNS\Responses\UnsubscribeResponse;
+use Yii;
 use yii\base\Component;
 use yii\base\InvalidConfigException;
 use AliyunMNS\Config;
 use AliyunMNS\Http\HttpClient;
+use AliyunMNS\Requests\CreateTopicRequest;
+use AliyunMNS\Requests\DeleteTopicRequest;
+use AliyunMNS\Responses\CreateTopicResponse;
+use AliyunMNS\Responses\DeleteTopicResponse;
 
 /**
  * Class Broadcast
@@ -45,6 +43,9 @@ class Broadcast extends Component
      */
     public $securityToken = null;
 
+    /** @var  string 默认操作的主题 */
+    public $topicName;
+
     /**
      * @var null|Config
      */
@@ -71,6 +72,9 @@ class Broadcast extends Component
         if (empty ($this->accessKey)) {
             throw new InvalidConfigException ('The "accessKey" property must be set.');
         }
+        if (empty ($this->topicName)) {
+            $this->topicName = Yii::$app->id;
+        }
         $this->client = new HttpClient($this->endPoint, $this->accessId, $this->accessKey, $this->securityToken, $this->config);
     }
 
@@ -79,11 +83,11 @@ class Broadcast extends Component
      * @param string $topicName
      * @return Topic
      */
-    public function getTopicRef($topicName)
+    public function getTopicRef($topicName = null)
     {
         return new Topic([
             'client' => $this->client,
-            'topicName' => $topicName
+            'topicName' => !is_null($topicName) ? $topicName : $this->topicName
         ]);
     }
 
