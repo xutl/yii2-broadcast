@@ -136,22 +136,22 @@ class Topic extends Object
         return $this->client->sendRequest($request, $response);
     }
 
-
     /**
-     * @param string $subscriptionName
-     * @param string $endPoint
-     * @param null $strategy
-     * @param null $contentFormat
-     * @param null $topicName
-     * @param null $topicOwner
-     * @param null $createTime
-     * @param null $lastModifyTime
+     * 创建主题订阅
+     * @param null|string $subscriptionName 订阅名称
+     * @param null|string $endPoint 接收端地址
+     * @param null|string $tag 消息过滤标签
+     * @param null|string $strategy 重试策略
+     * @param null|string $contentFormat 消息推送格式
+     * @param null|string $topicName 主题名称
+     * @param null|string $topicOwner 主题所有者
+     * @param null|string $createTime 创建时间
+     * @param null|string $lastModifyTime 最后修改时间
      * @return \AliyunMNS\Responses\BaseResponse
      */
-    public function subscription($subscriptionName = null, $endPoint = null, $strategy = null, $contentFormat = null, $topicName = null, $topicOwner = null,
-                                 $createTime = null, $lastModifyTime = null)
+    public function subscribe($subscriptionName = null, $endPoint = null, $tag = null, $strategy = null, $contentFormat = null, $topicName = null, $topicOwner = null, $createTime = null, $lastModifyTime = null)
     {
-        $attributes = new SubscriptionAttributes($subscriptionName, $endPoint);
+        $attributes = new SubscriptionAttributes($subscriptionName, $tag, $endPoint, $strategy, $contentFormat, $topicName, $topicOwner, $createTime, $lastModifyTime);
         $attributes->setTopicName($this->topicName);
         $request = new SubscribeRequest($attributes);
         $response = new SubscribeResponse();
@@ -160,7 +160,7 @@ class Topic extends Object
 
     /**
      * 解除主题订阅
-     * @param string $subscriptionName
+     * @param string $subscriptionName 订阅名称
      * @return \AliyunMNS\Responses\BaseResponse
      */
     public function unSubscribe($subscriptionName)
@@ -208,5 +208,4 @@ class Topic extends Object
         $response = new ListSubscriptionResponse();
         return $this->client->sendRequest($request, $response);
     }
-
 }
