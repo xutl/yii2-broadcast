@@ -27,6 +27,7 @@ use AliyunMNS\Responses\SetTopicAttributeResponse;
 use AliyunMNS\Responses\SubscribeResponse;
 use AliyunMNS\Responses\UnsubscribeResponse;
 use AliyunMNS\Requests\PublishMessageRequest;
+use yii\helpers\Json;
 
 /**
  * Class Topic
@@ -128,6 +129,7 @@ class Topic extends Object
      */
     public function publishMessage($messageBody, $messageTag = null, $messageAttributes = null)
     {
+        $messageBody = Json::encode($messageBody);
         $request = new PublishMessageRequest($messageBody, $messageTag, $messageAttributes);
         $request->setTopicName($this->topicName);
         $response = new PublishMessageResponse();
