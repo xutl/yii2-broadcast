@@ -7,6 +7,7 @@
 
 namespace xutl\broadcast;
 
+use yii\base\Object;
 use AliyunMNS\Model\SubscriptionAttributes;
 use AliyunMNS\Model\TopicAttributes;
 use AliyunMNS\Model\UpdateSubscriptionAttributes;
@@ -25,9 +26,6 @@ use AliyunMNS\Responses\SetSubscriptionAttributeResponse;
 use AliyunMNS\Responses\SetTopicAttributeResponse;
 use AliyunMNS\Responses\SubscribeResponse;
 use AliyunMNS\Responses\UnsubscribeResponse;
-use yii\base\Object;
-use AliyunMNS\Client;
-use AliyunMNS\Topic as TopicBackend;
 use AliyunMNS\Requests\PublishMessageRequest;
 
 /**
