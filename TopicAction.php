@@ -11,7 +11,6 @@ use Yii;
 use yii\base\Action;
 use yii\httpclient\Client;
 use yii\web\BadRequestHttpException;
-use yii\web\ForbiddenHttpException;
 use yii\web\UnauthorizedHttpException;
 
 /**
