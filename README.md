@@ -70,6 +70,32 @@ var_dump($res);
 
 ```
 
+```php
+class ApiController extends \yii\web\Controller
+{
+    public function actions()
+    {
+        return [
+            /**
+             * Returns an access token.
+             */
+            'callback' => [
+                'class' => \xutl\broadcast\TopicAction::classname(),
+                'callback'=>[$this, 'callback'],
+            ],
+        ];
+    }
+    
+    /**
+     * 
+     */
+    public function callback($params)
+    {
+        print_r($params);
+    }
+}
+```
+
 ## License
 
 This is released under the MIT License. See the bundled [LICENSE.md](LICENSE.md)
