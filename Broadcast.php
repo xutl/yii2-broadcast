@@ -92,6 +92,20 @@ class Broadcast extends Component
     }
 
     /**
+     * 向主题推送消息
+     * @param string $messageBody
+     * @param string $messageTag
+     * @param null $messageAttributes
+     * @param string $topicName
+     * @return \AliyunMNS\Responses\BaseResponse
+     */
+    public function publishMessage($messageBody, $messageTag = null, $messageAttributes = null, $topicName = null)
+    {
+        $topic = $this->getTopicRef($topicName);
+        return $topic->publishMessage($messageBody, $messageTag, $messageAttributes);
+    }
+
+    /**
      * 创建主题
      * @param string $topicName
      * @return \AliyunMNS\Responses\BaseResponse
