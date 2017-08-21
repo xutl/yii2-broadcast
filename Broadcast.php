@@ -93,7 +93,7 @@ class Broadcast extends Component
 
     /**
      * 向主题推送消息
-     * @param string $messageBody
+     * @param string|array $messageBody
      * @param string $messageTag
      * @param null $messageAttributes
      * @param string $topicName
