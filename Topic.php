@@ -151,7 +151,7 @@ class Topic extends Object
      */
     public function subscribe($subscriptionName = null, $endPoint = null, $tag = null, $strategy = null, $contentFormat = null, $topicName = null, $topicOwner = null, $createTime = null, $lastModifyTime = null)
     {
-        $attributes = new SubscriptionAttributes($subscriptionName, $tag, $endPoint, $strategy, $contentFormat, $topicName, $topicOwner, $createTime, $lastModifyTime);
+        $attributes = new SubscriptionAttributes($subscriptionName, $endPoint, $tag, $strategy, $contentFormat, $topicName, $topicOwner, $createTime, $lastModifyTime);
         $attributes->setTopicName($this->topicName);
         $request = new SubscribeRequest($attributes);
         $response = new SubscribeResponse();
